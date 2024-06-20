@@ -1,5 +1,3 @@
-# Dependencies
 node_modules
-
-# Database
-db/*.db
+db/app.db
+.env
