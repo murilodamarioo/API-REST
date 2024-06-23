@@ -30,7 +30,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
       .where({session_id: sessionId, id: id})
       .first()
 
-    return transaction
+    return {transaction}
   })
 
   app.get('/summary', async(request) => {
