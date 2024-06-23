@@ -1,8 +1,7 @@
-import { cookie } from '@fastify/cookie';
-import { it, expect, test, beforeAll, afterAll, describe } from 'vitest'
+import { it, expect, beforeAll, afterAll, beforeEach, describe } from 'vitest'
+import { execSync } from 'node:child_process'
 import request from 'supertest'
 import { app } from '../src/app'
-import { title } from 'process';
 
 describe('Transactions routes', () => {
   beforeAll(async () => {
@@ -11,6 +10,11 @@ describe('Transactions routes', () => {
   
   afterAll(async () => {
     await app.close()
+  })
+
+  beforeEach(() => {
+    execSync('npm run knex migrate:rollback --all')
+    execSync('npm run knex migrate:latest')
   })
   
   it('user can create a new transaction', async () => {
